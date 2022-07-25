@@ -11,7 +11,7 @@ spec:
         spec:
           containers:
             - name: wiki-url
-              image: CRONJOB_IMAGE
+              image: CRONJOB
               imagePullPolicy: Always
               env:
                 - name: SERVER_URL
