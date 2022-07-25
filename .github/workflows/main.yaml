@@ -7,9 +7,9 @@ env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: dwk-cluster
   GKE_ZONE: europe-north1-b
-  CLIENT_IMAGE: Project-Client-Image
-  SERVER_IMAGE: Project-Server-Image
-  CRONJOB_IMAGE: Project-Cronjob-Image
+  CLIENT_IMAGE: project-client-image
+  SERVER_IMAGE: project-server-image
+  CRONJOB_IMAGE: project-cronjob-image
 
 jobs:
   build-todo-app:
