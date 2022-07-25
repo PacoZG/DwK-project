@@ -15,25 +15,25 @@ spec:
         app: server
     spec:
       containers:
-      - name: server
-        image: project-server-image
-        imagePullPolicy: Always
-        env:
-          - name: POSTGRES_HOST
-            valueFrom:
-              configMapKeyRef:
-                name: config-env-variables
-                key: postgres-host
-        envFrom:
-          - secretRef:
-              name: postgres-pw
-        resources:
-          requests:
-            memory: "64Mi"
-            cpu: "250m"
-          limits:
-            memory: "516Mi"
-            cpu: "500m"
+        - name: server
+          image: server-image
+          imagePullPolicy: Always
+          env:
+            - name: POSTGRES_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: config-env-variables
+                  key: postgres-host
+          envFrom:
+            - secretRef:
+                name: postgres-pw
+          resources:
+            requests:
+              memory: '64Mi'
+              cpu: '250m'
+            limits:
+              memory: '516Mi'
+              cpu: '500m'
 
 ---
 # Service
@@ -47,6 +47,6 @@ spec:
   selector:
     app: server
   ports:
-  - port: 80
-    protocol: TCP
-    targetPort: 3001
+    - port: 80
+      protocol: TCP
+      targetPort: 3001

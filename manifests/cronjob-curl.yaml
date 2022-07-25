@@ -4,16 +4,16 @@ metadata:
   name: wiki-url
   namespace: project
 spec:
-  schedule: "* 10 * * *"
+  schedule: '* 10 * * *'
   jobTemplate:
     spec:
       template:
         spec:
           containers:
-          - name: wiki-url
-            image: project-cronjob-image
-            imagePullPolicy: Always
-            env:
-              - name: SERVER_URL
-                value: http://server-svc:80/api/todos
+            - name: wiki-url
+              image: cronjob-image
+              imagePullPolicy: Always
+              env:
+                - name: SERVER_URL
+                  value: http://server-svc:80/api/todos
           restartPolicy: OnFailure
