@@ -1,0 +1,50 @@
+# Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-dep
+  namespace: project
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: client
+  template:
+    metadata:
+      labels:
+        app: client
+    spec:
+      containers:
+      - name: client
+        image: project-client-image
+        imagePullPolicy: Always
+        # env:
+        #   - name: REACT_APP_SERVER_URL
+        #     valueFrom:
+        #       configMapKeyRef:
+        #         name: config-env-variables
+        #         key: server-url
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "516Mi"
+            cpu: "500m"
+
+---
+
+# Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: client-svc
+  namespace: project
+spec:
+  type: NodePort
+  selector:
+    app: client
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 3000
