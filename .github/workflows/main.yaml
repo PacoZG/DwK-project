@@ -26,25 +26,22 @@ jobs:
           project_id: ${{ secrets.GKE_PROJECT }}
           service_account_key: ${{ secrets.GKE_SA_KEY }}
           export_default_credentials: true
+
       - name: Configure docker to use the gcloud command-line tool as a credential helper
         run: gcloud --quiet auth configure-docker
+
       - name: Set kubectl to the right cluster
         run: gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
+
       - name: Build Client Image
         run: |-
-          docker build \
-            --tag "gcr.io/$PROJECT_ID/$CLIENT_IMAGE:${GITHUB_REF#refs/heads/}-$GITHUB_SHA" \
-            .
+          docker build --tag "gcr.io/$PROJECT_ID/$CLIENT_IMAGE:${GITHUB_REF#refs/heads/}-$GITHUB_SHA" ./client
       - name: Build Server Image
         run: |-
-          docker build \
-            --tag "gcr.io/$PROJECT_ID/$SERVER_IMAGE:${GITHUB_REF#refs/heads/}-$GITHUB_SHA" \
-            .
+          docker build --tag "gcr.io/$PROJECT_ID/$SERVER_IMAGE:${GITHUB_REF#refs/heads/}-$GITHUB_SHA" ./server
       - name: Build Cronjob Image
         run: |-
-          docker build \
-            --tag "gcr.io/$PROJECT_ID/$CRONJOB_IMAGE:${GITHUB_REF#refs/heads/}-$GITHUB_SHA" \
-            .
+          docker build --tag "gcr.io/$PROJECT_ID/$CRONJOB_IMAGE:${GITHUB_REF#refs/heads/}-$GITHUB_SHA" ./cronjob
       - name: Publish Client Image
         run: |-
           docker push "gcr.io/$PROJECT_ID/$CLIENT_IMAGE:${GITHUB_REF#refs/heads/}-$GITHUB_SHA"
@@ -56,6 +53,7 @@ jobs:
           docker push "gcr.io/$PROJECT_ID/$CRONJOB_IMAGE:${GITHUB_REF#refs/heads/}-$GITHUB_SHA"
       - name: Set up Kustomize
         uses: imranismail/setup-kustomize@v1
+
       - name: Deploy
         run: |-
           kustomize edit set image gcr.io/PROJECT_ID/CLIENT_IMAGE=gcr.io/$PROJECT_ID/$CLIENT_IMAGE:${GITHUB_REF#refs/heads/}-$GITHUB_SHA
