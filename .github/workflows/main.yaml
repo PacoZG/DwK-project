@@ -7,9 +7,9 @@ env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: dwk-cluster
   GKE_ZONE: europe-north1-b
-  # CLIENT_IMAGE: client-image
-  # SERVER_IMAGE: server-image
-  # CRONJOB_IMAGE: cronjob-image
+  CLIENT_IMAGE: client-image
+  SERVER_IMAGE: server-image
+  CRONJOB_IMAGE: cronjob-image
 
 jobs:
   build-todo-app:
@@ -56,9 +56,9 @@ jobs:
 
       - name: Deploy
         run: |-
-          kustomize edit set image CLIENT_IMAGE=gcr.io/$PROJECT_ID/$CLIENT_IMAGE:${GITHUB_REF#refs/heads/}-$GITHUB_SHA
-          kustomize edit set image SERVER_IMAGE=gcr.io/$PROJECT_ID/$SERVER_IMAGE:${GITHUB_REF#refs/heads/}-$GITHUB_SHA
-          kustomize edit set image CRONJOB_IMAGE=gcr.io/$PROJECT_ID/$CRONJOB_IMAGE:${GITHUB_REF#refs/heads/}-$GITHUB_SHA
+          kustomize edit set image CLIENT=gcr.io/$PROJECT_ID/$CLIENT_IMAGE:${GITHUB_REF#refs/heads/}-$GITHUB_SHA
+          kustomize edit set image SERVER=gcr.io/$PROJECT_ID/$SERVER_IMAGE:${GITHUB_REF#refs/heads/}-$GITHUB_SHA
+          kustomize edit set image CRONJOB=gcr.io/$PROJECT_ID/$CRONJOB_IMAGE:${GITHUB_REF#refs/heads/}-$GITHUB_SHA
           kustomize build . | kubectl apply -f -
           kubectl rollout status deployment $CLIENT_IMAGE
           kubectl rollout status deployment $SERVER_IMAGE

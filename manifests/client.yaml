@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: client
-          image: CLIENT_IMAGE
+          image: CLIENT
           imagePullPolicy: Always
           # env:
           #   - name: REACT_APP_SERVER_URL
