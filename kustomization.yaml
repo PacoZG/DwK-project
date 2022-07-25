@@ -9,8 +9,8 @@ resources:
   - manifests/server.yaml
 
 images:
-  - name: client-image
-    newName: sirpacoder/client:v3.03
+  - name: sirpacoder/client:v3.03
+    newName: client-image
   - name: server-image
     newName: sirpacoder/server:v3.03
   - name: cronjob-image
