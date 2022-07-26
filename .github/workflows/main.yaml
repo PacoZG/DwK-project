@@ -57,6 +57,7 @@ jobs:
 
       - name: Decrypt secret yaml
         run: |-
+          export SOPS_AGE_KEY_FILE=${{secrets.AGE_KEY}}
           sops -d -i secret.enc.yaml
 
       - name: Set up Kustomize
