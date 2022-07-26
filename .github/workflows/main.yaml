@@ -51,6 +51,14 @@ jobs:
       - name: Publish Cronjob Image
         run: |-
           docker push "gcr.io/$PROJECT_ID/$CRONJOB_IMAGE:${GITHUB_REF#refs/heads/}-$GITHUB_SHA"
+
+      - name: Install sops
+        uses: mdgreenwald/mozilla-sops-action@v1.2.0
+
+      - name: Decrypt secret yaml
+        run: |-
+          sops -d -i secret.enc.yaml
+
       - name: Set up Kustomize
         uses: imranismail/setup-kustomize@v1
 

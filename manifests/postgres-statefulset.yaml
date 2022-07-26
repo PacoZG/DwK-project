@@ -7,14 +7,13 @@ metadata:
     app: postgres
 spec:
   ports:
-  - port: 5432
-    name: web
+    - port: 5432
+      name: web
   clusterIP: None
   selector:
     app: postgres
 
 ---
-
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -48,7 +47,7 @@ spec:
     - metadata:
         name: database
       spec:
-        accessModes: ["ReadWriteOnce"]
+        accessModes: ['ReadWriteOnce']
         resources:
           requests:
             storage: 100Mi
