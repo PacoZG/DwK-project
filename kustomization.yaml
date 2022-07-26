@@ -7,3 +7,11 @@ resources:
   - manifests/ingress.yaml
   - manifests/postgres-statefulset.yaml
   - manifests/server.yaml
+
+images:
+  - name: CLIENT/IMAGE
+    newName: sirpacoder/client:v3.03
+  - name: SERVER/IMAGE
+    newName: sirpacoder/server:v3.03
+  - name: CRONJOB/IMAGE
+    newName: sirpacoder/wiki_url:v3.03

@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: server
-          image: SERVER
+          image: SERVER/IMAGE
           imagePullPolicy: Always
           env:
             - name: POSTGRES_HOST
