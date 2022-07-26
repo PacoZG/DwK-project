@@ -7,8 +7,8 @@ env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: dwk-cluster
   GKE_ZONE: europe-north1-b
-  CLIENT_IMAGE: client
-  SERVER_IMAGE: server
+  CLIENT_IMAGE: client-dep
+  SERVER_IMAGE: server-dep
   CRONJOB_IMAGE: wiki-url
 
 jobs:
