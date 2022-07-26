@@ -7,8 +7,8 @@ env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: dwk-cluster
   GKE_ZONE: europe-north1-b
-  CLIENT_IMAGE: client-dep
-  SERVER_IMAGE: server-dep
+  CLIENT_IMAGE: client
+  SERVER_IMAGE: server
   CRONJOB_IMAGE: wiki-url
 
 jobs:
@@ -60,7 +60,7 @@ jobs:
           kustomize edit set image gcr.io/SERVER/IMAGE=gcr.io/$PROJECT_ID/$SERVER_IMAGE:${GITHUB_REF#refs/heads/}-$GITHUB_SHA
           kustomize edit set image gcr.io/CRONJOB/IMAGE=gcr.io/$PROJECT_ID/$CRONJOB_IMAGE:${GITHUB_REF#refs/heads/}-$GITHUB_SHA
           kustomize build . | kubectl apply -f -
-          kubectl rollout status deployment $CLIENT_IMAGE
-          kubectl rollout status deployment $SERVER_IMAGE
-          kubectl rollout status deployment $CRONJOB_IMAGE
+          kubectl rollout status deployment $CLIENT_IMAGE-dep
+          kubectl rollout status deployment $SERVER_IMAGE-dep
+          kubectl rollout status deployment $CRONJOB_IMAGE-dep
           kubectl get services -o wide
