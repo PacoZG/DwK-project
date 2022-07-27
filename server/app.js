@@ -19,11 +19,19 @@ setTimeout(() => {
         status text
       );`
     )
+    await client.query(
+      `CREATE TABLE IF NOT EXISTS image(
+        id SERIAL PRIMARY KEY,
+        date TIMESTAMP,
+        imageURL TEXT
+      );`
+    )
     await client.end()
   })()
 }, 5000)
 
 const todoappRouter = require('./controllers/todos')
+const imageRouter = require('./controllers/image')
 
 app.use(middleware.tokenExtractor)
 app.use(middleware.serverURL)
@@ -34,6 +42,7 @@ app.use(cors())
 app.use(express.json())
 app.use(express.static('build'))
 app.use('/api/todos', todoappRouter)
+app.use('/api/image', imageRouter)
 
 app.get('/health', (_, res) => {
   res.send('ok')

@@ -1,5 +1,9 @@
 node_modules
 database
 
+client/node_modules/.cache/default-development
+
 key.txt
 private-key.json
+backup.js
+*.pack

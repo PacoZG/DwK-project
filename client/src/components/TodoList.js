@@ -1,12 +1,34 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { createTodo, deleteTodo, updateTodo } from '../reducers/todoReducer'
+import imageService from '../services/image'
 import { useField } from '../hooks/index'
+import moment from 'moment'
 
 const TodoList = () => {
   const dispatch = useDispatch()
+  const [imageURL, setImageURL] = useState('')
   const todos = useSelector(state => state.todos)
   const task = useField('text')
+
+  // Load or saved a new random image url on the db
+  useEffect(async () => {
+    const imageData = await imageService.getImage()
+    const imageDate = moment(imageData.date)
+    const today = moment(new Date().toISOString())
+
+    if (!today.isSame(imageDate, 'day')) {
+      console.log('Post a new Image')
+      const newImage = await imageService.postImage()
+      setImageURL(newImage.imageURL)
+    }
+
+    if (today.isSame(imageDate, 'day')) {
+      console.log('Loading saved image')
+      const imageData = await imageService.getImage()
+      setImageURL(imageData.imageurl)
+    }
+  }, [])
 
   const handleCreateTodo = () => {
     if (task.params.value.length >= 10) {
@@ -39,7 +61,7 @@ const TodoList = () => {
 
   return (
     <div className="TodoList">
-      <img className="image" alt="pic" src="https://picsum.photos/1200" />
+      <img className="image" alt="pic" src={imageURL} />
       {task.params.value.length <= 140 ? (
         <label className="label">{`${task.params.value.length} characters of 140 allowed`}</label>
       ) : (
