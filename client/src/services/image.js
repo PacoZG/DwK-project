@@ -19,7 +19,7 @@ const postImage = async () => {
     date: newDate,
     imageURL: getRandomURL.request.responseURL,
   }
-  const response = await axios.post(`${baseurl}/api/image`, imageData)
+  await axios.post(`${baseurl}/api/image`, imageData)
   return imageData
 }
 

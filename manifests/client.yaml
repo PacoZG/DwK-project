@@ -18,12 +18,6 @@ spec:
         - name: client
           image: CLIENT/IMAGE
           imagePullPolicy: Always
-          # env:
-          #   - name: REACT_APP_SERVER_URL
-          #     valueFrom:
-          #       configMapKeyRef:
-          #         name: config-env-variables
-          #         key: server-url
           resources:
             requests:
               memory: '64Mi'

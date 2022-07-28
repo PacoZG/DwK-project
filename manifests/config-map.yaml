@@ -5,4 +5,3 @@ metadata:
   namespace: project
 data:
   postgres-host: postgres-svc
-  # server-url: http://server-svc

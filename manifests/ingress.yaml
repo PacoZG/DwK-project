@@ -7,26 +7,33 @@ metadata:
     name: project
 spec:
   rules:
-  - http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: client-svc
-            port: 
-              number: 80
-      - path: /api/todos
-        pathType: Prefix
-        backend:
-          service:
-            name: server-svc
-            port:
-              number: 80
-      - path: /health
-        pathType: Prefix
-        backend:
-          service:
-            name: server-svc
-            port:
-              number: 80
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: client-svc
+                port:
+                  number: 80
+          - path: /api/todos
+            pathType: Prefix
+            backend:
+              service:
+                name: server-svc
+                port:
+                  number: 80
+          - path: /api/image
+            pathType: Prefix
+            backend:
+              service:
+                name: server-svc
+                port:
+                  number: 80
+          - path: /health
+            pathType: Prefix
+            backend:
+              service:
+                name: server-svc
+                port:
+                  number: 80

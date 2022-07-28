@@ -28,7 +28,7 @@ setTimeout(() => {
     )
     await client.end()
   })()
-}, 5000)
+}, 15000)
 
 const todoappRouter = require('./controllers/todos')
 const imageRouter = require('./controllers/image')

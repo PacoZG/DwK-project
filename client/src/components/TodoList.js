@@ -14,6 +14,7 @@ const TodoList = () => {
   // Load or saved a new random image url on the db
   useEffect(async () => {
     const imageData = await imageService.getImage()
+
     const imageDate = moment(imageData.date)
     const today = moment(new Date().toISOString())
 
@@ -26,7 +27,15 @@ const TodoList = () => {
     if (today.isSame(imageDate, 'day')) {
       console.log('Loading saved image')
       const imageData = await imageService.getImage()
-      setImageURL(imageData.imageurl)
+      console.log('Message: ', imageData.message)
+
+      if (imageData.message === 'Image is not present') {
+        await imageService.postImage()
+        const loadNewImage = await imageService.getImage()
+        setImageURL(loadNewImage.imageurl)
+      } else {
+        setImageURL(imageData.imageurl)
+      }
     }
   }, [])
 
