@@ -7,3 +7,4 @@ key.txt
 private-key.json
 backup.js
 *.pack
+secret.yaml
