@@ -30,6 +30,12 @@ jobs:
       - name: Sops Binary Installer
         uses: mdgreenwald/mozilla-sops-action@v1.2.0
 
+      - name: Decrypt secret yaml
+        run: |-
+          echo "${{ secrets.AGE_SECRET_KEY }}" > key.txt
+          export SOPS_AGE_KEY_FILE=key.txt
+          sops -d -i manifests/secret.enc.yaml
+
       - name: Configure docker to use the gcloud command-line tool as a credential helper
         run: gcloud --quiet auth configure-docker
 
@@ -63,9 +69,6 @@ jobs:
           kubectl create namespace ${GITHUB_REF#refs/heads/} || true
           kubectl config set-context --current --namespace=${GITHUB_REF#refs/heads/}
           kustomize edit set namespace ${GITHUB_REF#refs/heads/}
-          echo "${{ secrets.AGE_SECRET_KEY }}" > key.txt
-          export SOPS_AGE_KEY_FILE=key.txt
-          sops --decrypt manifests/secret.enc.yaml | kubectl apply -f -
           kustomize edit set image CLIENT=gcr.io/$PROJECT_ID/$CLIENT_IMAGE:${GITHUB_REF#refs/heads/}-$GITHUB_SHA
           kustomize edit set image SERVER=gcr.io/$PROJECT_ID/$SERVER_IMAGE:${GITHUB_REF#refs/heads/}-$GITHUB_SHA
           kustomize edit set image CRONJOB=gcr.io/$PROJECT_ID/$CRONJOB_IMAGE:${GITHUB_REF#refs/heads/}-$GITHUB_SHA
