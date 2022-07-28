@@ -35,8 +35,6 @@ $ sops --decrypt secret.enc.yaml | kubectl apply -f -
 
 ---
 
-The rest of the manifests and project can be found [here](./project)
-
 The image of the hash writer can be found [here](https://hub.docker.com/r/sirpacoder/client)
 
 The image of the hash reader can be found [here](https://hub.docker.com/r/sirpacoder/server)
