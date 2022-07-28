@@ -1,7 +1,7 @@
 name: Delete branch environment
 
 on:
-  push:
+  delete:
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
