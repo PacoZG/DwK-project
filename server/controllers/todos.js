@@ -28,7 +28,6 @@ todoappRouter.post('/', async (request, response) => {
       status: 'not-done',
     }
     response.status(201).json(newTodo)
-    console.log(body.task)
   } else {
     console.error("ERROR: Todo's lenght is larger than 140 characters")
   }

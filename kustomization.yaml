@@ -8,6 +8,7 @@ resources:
 - manifests/postgres-statefulset.yaml
 - manifests/server.yaml
 - manifests/secret.enc.yaml
+- manifests/horizontalpodautoscaler.yaml
 
 images:
 - name: CLIENT/IMAGE
