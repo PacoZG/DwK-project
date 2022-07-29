@@ -1,4 +1,5 @@
-This ToDo Project is a simple application design and created as part of the exercises for the course
+# This ToDo Project is a simple application design and created as part of the exercises for the course
+
 [DevOps with Kubernetes](https://devopswithkubernetes.com/)
 
 It consists in a [frontend](./client/) "Client", a [backend](./server/) "Server" and a very simple [cronjob](./cronjob/)
