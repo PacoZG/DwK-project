@@ -34,7 +34,6 @@ const todoappRouter = require('./controllers/todos')
 const imageRouter = require('./controllers/image')
 
 app.use(middleware.tokenExtractor)
-app.use(middleware.serverURL)
 app.use(middleware.requestLogger)
 app.use(middleware.errorHandler)
 

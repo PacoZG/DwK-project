@@ -1,37 +1,8 @@
-# Exercise 3.03: Project v1.4
+This ToDo Project is a simple application design and created as part of the exercises for the course
+[DevOps with Kubernetes](https://devopswithkubernetes.com/)
 
-## In order to run this exercise locally I made the next configuration:
-
-### Command used for `Kustomize`:
-
-```
-$ kustomize edit add resource manifests/*.yaml
-
-$ kubectl apply -k .
-
-$ kubectl kustomize .
-```
-
-### Command for workflow configuration
-
-```
-$ gcloud iam service-accounts keys create ./private-key.json \
-    --iam-account=github-actions@dwk-gke-356913.iam.gserviceaccount.com
-
-$ gcloud --quiet auth configure-docker
-```
-
-### Cluster deployment to GCloud
-
-```
-$ kubectl apply -f project-space.yaml
-
-$ kubectl config set-context --current --namespace=project
-
-$ export SOPS_AGE_KEY_FILE=$(pwd)/key.txt
-
-$ sops --decrypt secret.enc.yaml | kubectl apply -f -
-```
+It consists in a [frontend](./client/) "Client", a [backend](./server/) "Server" and a very simple [cronjob](./cronjob/)
+that creates random wiki urls
 
 ---
 
