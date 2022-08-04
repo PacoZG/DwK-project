@@ -30,7 +30,7 @@ spec:
                 name: server-svc
                 port:
                   number: 80
-          - path: /health
+          - path: /healthz
             pathType: Prefix
             backend:
               service:

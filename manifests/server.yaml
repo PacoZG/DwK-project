@@ -24,6 +24,16 @@ spec:
                 configMapKeyRef:
                   name: config-env-variables
                   key: postgres-host
+            - name: POSTGRES_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: config-env-variables
+                  key: postgres_user
+            - name: POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: config-env-variables
+                  key: postgres_db
           envFrom:
             - secretRef:
                 name: postgres-pw
