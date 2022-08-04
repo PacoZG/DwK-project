@@ -43,8 +43,17 @@ app.use(express.static('build'))
 app.use('/api/todos', todoappRouter)
 app.use('/api/image', imageRouter)
 
-app.get('/health', (_, res) => {
-  res.send('ok')
+app.get('/healthz', async (_, res) => {
+  try {
+    const client = config.connect()
+    await client.connect()
+    console.log(`Received a request to healthz and responding with status 200`)
+    res.status(200).send('Application ready')
+    await client.end()
+  } catch (error) {
+    console.log(`Received a request to healthz and responding with status 500`)
+    res.status(500).send('Application not Ready')
+  }
 })
 
 app.get('/', (_, res) => {
