@@ -2,6 +2,8 @@ import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { getAllTodos } from './reducers/todoReducer'
 import TodoList from './components/TodoList'
+import { Routes, Route } from 'react-router-dom'
+import HealthCheck from './components/HealthCheck'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -12,7 +14,10 @@ const App = () => {
 
   return (
     <div className="App">
-      <TodoList />
+      <Routes>
+        <Route path="/" element={<TodoList />} />
+        <Route path="/healthz" element={<HealthCheck />} />
+      </Routes>
     </div>
   )
 }

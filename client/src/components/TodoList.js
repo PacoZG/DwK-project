@@ -4,6 +4,7 @@ import { createTodo, deleteTodo, updateTodo } from '../reducers/todoReducer'
 import imageService from '../services/image'
 import { useField } from '../hooks/index'
 import moment from 'moment'
+import { Link } from 'react-router-dom'
 
 const TodoList = () => {
   const dispatch = useDispatch()
@@ -70,6 +71,9 @@ const TodoList = () => {
 
   return (
     <div className="TodoList">
+      <div className="health-buttons">
+        <Link to="/healthz">Health Check</Link>
+      </div>
       <img className="image" alt="pic" src={imageURL} />
       {task.params.value.length <= 140 ? (
         <label className="label">{`${task.params.value.length} characters of 140 allowed`}</label>
