@@ -35,6 +35,13 @@ code {
   height: fit-content;
 }
 
+.health-buttons {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .image {
   width: 500px;
   border-radius: 10px;

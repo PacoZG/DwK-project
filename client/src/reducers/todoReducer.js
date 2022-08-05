@@ -25,11 +25,15 @@ const todoReducer = (state = [], action) => {
 
 export const getAllTodos = () => {
   return async dispatch => {
-    const todos = await todoService.getAllTodos()
-    dispatch({
-      type: 'GET_TODOS',
-      data: todos,
-    })
+    try {
+      const todos = await todoService.getAllTodos()
+      dispatch({
+        type: 'GET_TODOS',
+        data: todos,
+      })
+    } catch (error) {
+      console.log(error.message, 'from', error.config.url)
+    }
   }
 }
 
