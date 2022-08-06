@@ -8,3 +8,5 @@ private-key.json
 backup.js
 *.pack
 secret.yaml
+.prettierignore
+.prettierrc.json
