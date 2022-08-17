@@ -6,5 +6,8 @@ coverage
 *.html
 *.json
 *.yml
+*.yaml
 *.md
 *.css
+*.json
+*.git

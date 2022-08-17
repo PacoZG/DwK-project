@@ -18,7 +18,7 @@ const connect = () => {
   return client
 }
 
-const query = async (query) => {
+const query = async query => {
   const client = connect()
   // console.log({ client })
   await client.connect()
