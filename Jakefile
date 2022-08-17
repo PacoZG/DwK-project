@@ -14,43 +14,23 @@ function execCmd(cmd) {
   })
 }
 
-namespace('be', () => {
-  desc('Build server')
-  task('build', async () => {
-    await execCmd('npm --prefix server install && npm --prefix server run build')
-  })
-
-  desc('Start server')
-  task('run', ['build'], async () => {
-    await execCmd('npm --prefix server start')
-  })
-
-  desc('Test server')
-  task('test', ['build'], async () => {
-    await execCmd('npm --prefix server run lint')
-    await execCmd('npm --prefix server test -- --all --watchAll=false --ci')
-    await execCmd('npm --prefix server run test:e2e -- --all --watchAll=false --ci')
+namespace('server', () => {
+  desc('Starting server')
+  task('start', async function () {
+    await execCmd('./npm-scripts/start-server.sh')
   })
 })
 
-namespace('fe', () => {
-  desc('Build client')
-  task('build', async () => {
-    await execCmd('npm --prefix client install && CI=true npm --prefix client run build')
-  })
-
-  desc('Start client')
-  task('run', ['build'], async () => {
-    await execCmd('npm --prefix client start')
-  })
-
-  desc('Test client')
-  task('test', ['build'], async () => {
-    await execCmd('npm --prefix client test -- --all --watchAll=false --ci')
+namespace('client', () => {
+  desc('Starting client')
+  task('start', async function () {
+    setTimeout(async () => {
+      await execCmd('./npm-scripts/start-client.sh')
+    }, 3000)
   })
 })
 
 desc('Start client and server')
-task('run', ['fe:run', 'be:run'], {
-  concurrency: 3,
+task('run', ['client:start', 'server:start'], {
+  concurrency: 2,
 })
