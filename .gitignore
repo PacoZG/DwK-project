@@ -1,12 +1,13 @@
+# folders
 node_modules
+database
 database
 
 client/node_modules/.cache/default-development
 
+# files
 key.txt
 private-key.json
-backup.js
 *.pack
 secret.yaml
-.prettierignore
-.prettierrc.json
+.env

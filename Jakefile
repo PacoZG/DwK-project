@@ -30,7 +30,19 @@ namespace('client', () => {
   })
 })
 
+namespace('db', function () {
+  desc('Start local-database')
+  task('run', async function () {
+    await execCmd('./local-database/start.sh')
+  })
+
+  desc('Kill running local-database')
+  task('kill', async function () {
+    await execCmd('./local-database/stop.sh')
+  })
+})
+
 desc('Start client and server')
-task('run', ['client:start', 'server:start'], {
+task('run', ['client:start', 'server:start', 'db:run'], {
   concurrency: 2,
 })
