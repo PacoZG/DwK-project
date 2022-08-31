@@ -1,5 +1,5 @@
 {
-  "name": "todo-server",
+  "name": "broadcaster",
   "version": "1.0.0",
   "description": "Exercises DevOps with Kubernetes",
   "main": "index.js",
@@ -7,21 +7,14 @@
     "server": "node index.js",
     "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "check-code-style": "npx prettier --c .",
-    "fix-code-style": "npx prettier --write ."
+    "check-code-style": "npx prettier --c ."
   },
   "author": "Paco Zavala",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.27.2",
-    "cors": "^2.8.5",
     "dotenv": "^16.0.1",
-    "express": "^4.18.1",
-    "express-async-errors": "^3.1.1",
-    "moment": "^2.29.4",
     "nats": "^2.7.1",
-    "nodemon": "^2.0.16",
-    "pg": "^8.7.3",
-    "uuidv4": "^6.2.13"
+    "nodemon": "^2.0.16"
   }
 }

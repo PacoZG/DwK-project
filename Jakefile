@@ -42,7 +42,14 @@ namespace('db', function () {
   })
 })
 
+namespace('broadcaster', function () {
+  desc('Starting broadcaster')
+  task('start', async function () {
+    await execCmd('./start-boradcaster.sh')
+  })
+})
+
 desc('Start client and server')
-task('run', ['client:start', 'server:start', 'db:run'], {
+task('run', ['client:start', 'server:start', 'db:run', 'broadcaster:start'], {
   concurrency: 2,
 })

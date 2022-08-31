@@ -3,10 +3,18 @@ const express = require('express')
 const cors = require('cors')
 const config = require('./utils/config')
 const middleware = require('./utils/middleware')
+const NATS = require('nats')
+const natsSC = NATS.StringCodec()
 
 const app = express()
 
 console.log('Password: ', config.PASSWORD)
+
+const NATS_URL = process.env.NATS_URL || 'demo.nats.io:4222'
+
+NATS.connect({ servers: NATS_URL }).then(async nc => {
+  nc.publish('todo_created', natsSC.encode('Sending data'))
+})
 
 setTimeout(() => {
   ;(async () => {
@@ -28,7 +36,7 @@ setTimeout(() => {
     )
     await client.end()
   })()
-}, 15000)
+}, 10000)
 
 const todoappRouter = require('./controllers/todos')
 const imageRouter = require('./controllers/image')

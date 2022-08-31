@@ -54,7 +54,7 @@ const TodoList = () => {
           task: task.params.value,
         }
         dispatch(createTodo(newTodo))
-        window.alert("ERROR: Todo's lenght is larger than 140 characters")
+        window.alert("ERROR: Todo's length is larger than 140 characters")
       }
     } else {
       window.alert('Todos length is too short')
