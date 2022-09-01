@@ -10,12 +10,6 @@ const app = express()
 
 console.log('Password: ', config.PASSWORD)
 
-const NATS_URL = process.env.NATS_URL || 'demo.nats.io:4222'
-
-NATS.connect({ servers: NATS_URL }).then(async nc => {
-  nc.publish('todo_created', natsSC.encode('Sending data'))
-})
-
 setTimeout(() => {
   ;(async () => {
     const client = config.connect()

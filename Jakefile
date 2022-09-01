@@ -45,11 +45,11 @@ namespace('db', function () {
 namespace('broadcaster', function () {
   desc('Starting broadcaster')
   task('start', async function () {
-    await execCmd('./start-boradcaster.sh')
+    await execCmd('./npm-scripts/start-broadcaster.sh')
   })
 })
 
 desc('Start client and server')
 task('run', ['client:start', 'server:start', 'db:run', 'broadcaster:start'], {
-  concurrency: 2,
+  concurrency: 4,
 })
