@@ -3,8 +3,6 @@ const express = require('express')
 const cors = require('cors')
 const config = require('./utils/config')
 const middleware = require('./utils/middleware')
-const NATS = require('nats')
-const natsSC = NATS.StringCodec()
 
 const app = express()
 
@@ -18,7 +16,9 @@ setTimeout(() => {
       `CREATE TABLE IF NOT EXISTS todos(
         id uuid PRIMARY KEY,
         task text,
-        status text
+        status text,
+        createdAt TIMESTAMP,
+        modifiedAt TIMESTAMP 
       );`
     )
     await client.query(

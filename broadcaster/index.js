@@ -1,6 +1,9 @@
+require('dotenv').config()
 const NATS = require('nats')
 const natsSC = NATS.StringCodec()
-const NATS_URL = process.env.NATS_URL || 'demo.nats.io:4222'
+const NATS_URL = process.env.NATS_URL
+
+console.log({ NATS_URL })
 
 const axios = require('axios')
 const discord_url =
