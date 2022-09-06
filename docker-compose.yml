@@ -62,6 +62,7 @@ services:
       dockerfile: Dockerfile
     environment:
       - NATS_URL=localhost:4222
+      - DISCORD_URL=https://discord.com/api/webhooks/1012335028254036099/JS8N_3lG6iGPLRORpz1mcOfIX5WzPJ5JrUJryyFm2_nOCOwmP8qcBakK6YtfDm3DQLD-
 
 volumes:
     database:
