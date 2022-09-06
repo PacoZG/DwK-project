@@ -33,25 +33,29 @@ todoappRouter.post('/', async (request, response) => {
   console.log(`POST request to ${request.protocol}://${request.get('host')}/api/todos  done succesfully`)
   const { body } = request
   const scapedTask = config.connect().escapeLiteral(body.task)
+  const newDate = moment().format('YYYY-MM-DD HH:mm:ss')
 
   if (body.task.length <= 140) {
-    await config.query(`INSERT INTO todos(id, task, status) VALUES('${id}', ${scapedTask}, 'not-done')`)
+    await config.query(
+      `INSERT INTO todos(id, task, status, createdat) VALUES('${id}', ${scapedTask}, 'not-done', '${newDate}')`
+    )
     const newTodo = {
       ...body,
       id: id,
       status: 'not-done',
-      createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
-      modifiedAt: null,
+      createdat: newDate,
+      modifiedat: null,
     }
 
     const todoForDiscord = `New todo created...\n{\n id: ${id}\n task: ${newTodo.task}\n status: ${
       newTodo.status
-    }\n createdAt: ${newTodo.createdAt}\n modifiedAt: ${newTodo.modifiedAt}\n}\n\nDate: ${moment().format(
+    }\n createdAt: ${newTodo.createdat}\n modifiedAt: ${newTodo.modifiedat}\n}\n\nDate: ${moment().format(
       'YYYY-MM-DD HH:mm:ss'
     )}`
     connect({ servers: NATS_URL }).then(async nc => {
       nc.publish('todo_created', sc.encode(todoForDiscord))
     })
+
     response.status(201).json(newTodo)
   } else {
     console.error("ERROR: Todo's lenght is larger than 140 characters")
@@ -63,27 +67,31 @@ todoappRouter.put('/:id', async (request, response) => {
   console.log(`PUT request to ${request.protocol}://${request.get('host')}/api/todos/${id}  done succesfully`)
   const { body } = request
 
+  const newDate = moment().format('YYYY-MM-DD HH:mm:ss')
+
   let status
   if (body.status === 'not-done') {
     status = 'done'
   } else {
     status = 'not-done'
   }
-  await config.query(`UPDATE todos SET status='${status}' WHERE id='${id}'`)
+
+  await config.query(`UPDATE todos SET status='${status}', modifiedat='${newDate}' WHERE id='${id}'`)
   updatedTodo = {
     ...body,
     status: `${status}`,
-    modifiedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
+    modifiedat: newDate,
   }
 
   const todoForDiscord = `Todo marked as ${updatedTodo.status}...\n{\n id: ${id}\n task: ${
     updatedTodo.task
-  }\n status: ${updatedTodo.status}\n createdAt: ${updatedTodo.createdAt}\n modifiedAt: ${
-    updatedTodo.modifiedAt
-  }\n}\n\nModified at: ${moment().format('YYYY-MM-DD HH:mm:ss')}`
+  }\n status: ${updatedTodo.status}\n createdAt: ${moment(updatedTodo.createdat).format(
+    'YYYY-MM-DD HH:mm:ss'
+  )}\n modifiedAt: ${newDate}\n}\n\nModified at: ${newDate}`
   connect({ servers: NATS_URL }).then(async nc => {
     nc.publish('todo_created', sc.encode(todoForDiscord))
   })
+
   response.status(201).json(updatedTodo)
 })
 

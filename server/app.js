@@ -17,8 +17,8 @@ setTimeout(() => {
         id uuid PRIMARY KEY,
         task text,
         status text,
-        createdAt TIMESTAMP,
-        modifiedAt TIMESTAMP 
+        createdat TIMESTAMP,
+        modifiedat TIMESTAMP DEFAULT NULL 
       );`
     )
     await client.query(

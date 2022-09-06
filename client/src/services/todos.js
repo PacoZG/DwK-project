@@ -25,7 +25,8 @@ const removeTodo = async id => {
 const updateTodo = async todo => {
   console.log(`Updating ToDo from ${baseurl}/api/todos/${todo.id}`)
   const response = await axios.put(`${baseurl}/api/todos/${todo.id}`, todo)
-  response.data
+  console.log(response)
+  return response.data
 }
 
 export default { getAllTodos, createTodo, removeTodo, updateTodo }

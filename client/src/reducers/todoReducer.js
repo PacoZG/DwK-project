@@ -10,14 +10,7 @@ const todoReducer = (state = [], action) => {
       return state.filter(todo => todo.id !== action.data)
     case 'UPDATE_TODO':
       const id = action.data.id
-      const todoToUpdate = state.find(todo => todo.id === id)
-      let updatedTodo
-      if (action.data.status === 'not-done') {
-        updatedTodo = { ...todoToUpdate, status: 'done' }
-      } else {
-        updatedTodo = { ...todoToUpdate, status: 'not-done' }
-      }
-      return state.map(todo => (todo.id !== id ? todo : updatedTodo))
+      return state.map(todo => (todo.id !== id ? todo : action.data))
     default:
       return state
   }
@@ -59,10 +52,10 @@ export const deleteTodo = todo => {
 
 export const updateTodo = todo => {
   return async dispatch => {
-    await todoService.updateTodo(todo)
+    const updatedTodo = await todoService.updateTodo(todo)
     dispatch({
       type: 'UPDATE_TODO',
-      data: todo,
+      data: updatedTodo,
     })
   }
 }

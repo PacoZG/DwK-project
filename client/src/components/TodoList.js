@@ -41,22 +41,14 @@ const TodoList = () => {
   }, [])
 
   const handleCreateTodo = () => {
-    if (task.params.value.length >= 10) {
-      if (task.params.value.length <= 140) {
-        const newTodo = {
-          task: task.params.value,
-        }
-        dispatch(createTodo(newTodo))
-        task.reset()
-      } else {
-        const newTodo = {
-          task: task.params.value,
-        }
-        dispatch(createTodo(newTodo))
-        window.alert("ERROR: Todo's length is larger than 140 characters")
+    if (task.params.value.length >= 10 && task.params.value.length <= 140) {
+      const newTodo = {
+        task: task.params.value,
       }
+      dispatch(createTodo(newTodo))
+      task.reset()
     } else {
-      window.alert('Todos length is too short')
+      window.alert("ERROR: Todo's length requires to be between 10 and 140 characters long")
     }
   }
 
