@@ -12,8 +12,6 @@ const TodoList = () => {
   const todos = useSelector(state => state.todos)
   const task = useField('text')
 
-  console.log(todos)
-
   // Load or saved a new random image url on the db
   useEffect(async () => {
     const imageData = await imageService.getImage()
