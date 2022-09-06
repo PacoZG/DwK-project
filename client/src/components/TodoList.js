@@ -65,7 +65,9 @@ const TodoList = () => {
       <div className="health-buttons">
         <Link to="/healthz">Health Check</Link>
       </div>
+
       <img className="image" alt="pic" src={imageURL} />
+
       {task.params.value.length <= 140 ? (
         <label className="label">{`${task.params.value.length} characters of 140 allowed`}</label>
       ) : (
@@ -73,30 +75,36 @@ const TodoList = () => {
           parseInt(task.params.value.length) - 140
         } characters longer than the maximum allowed`}</label>
       )}
+
       <textarea className="textarea" placeholder="140 characters minimum" maxLength={200} {...task.params} />
+
       <button className="button" onClick={() => handleCreateTodo()}>
         Create TODO
       </button>
+
       <div className="frame">
         {todos.map(todo => (
-          <ul className="todo" key={todo.id}>
-            <li className="text">
-              <label>{`To do: `}</label>
+          <div className="todo" key={todo.id}>
+            <div className="text">
+              <label className="todo-label">{`To do:`}</label>
               {todo.task.startsWith('http') ? (
                 <div className="span-link">
                   <p className="span-link">{'Read '}</p>
+
                   <a className="hyperlink" href={todo.task} target="blank">
                     {'Wiki page'}
                   </a>
                 </div>
               ) : (
-                <span className="span">{todo.task}</span>
+                <p className="task">{todo.task}</p>
               )}
-            </li>
+            </div>
             <div className="status">
-              {`Status: `}
-              <div className="status-label">
-                <span className="span">{todo.status}</span>
+              <label className="status-label">{`Status: `}</label>
+
+              <div className="status-change">
+                <p className="status-is-done">{todo.status}</p>
+
                 {todo.status === 'not-done' ? (
                   <button className="update-button" onClick={() => handleUpdateTodo(todo)}>
                     mark as done
@@ -108,10 +116,11 @@ const TodoList = () => {
                 )}
               </div>
             </div>
+
             <button className="delete-button" onClick={() => handleDeleteTodo(todo)}>
               delete
             </button>
-          </ul>
+          </div>
         ))}
       </div>
     </div>

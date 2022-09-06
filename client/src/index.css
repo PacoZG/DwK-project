@@ -42,12 +42,17 @@ code {
   justify-content: space-between;
 }
 
+.todo-label {
+  width: 15%;
+  margin: 0px;
+}
+
 .image {
   width: 500px;
   border-radius: 10px;
 }
 
-.label{
+.label {
   font-size: 12px;
   text-align: left;
   width: 500px;
@@ -78,6 +83,9 @@ code {
 }
 
 .todo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   border-style: dotted;
   border-width: 2px;
   margin-bottom: 10px;
@@ -92,7 +100,7 @@ code {
   margin: 0px;
   padding-bottom: 5px;
   display: flex;
-  align-items: center;
+  align-items: left;
   gap: 15px;
 }
 
@@ -103,6 +111,7 @@ code {
   gap: 10px;
   padding-left: 10px;
   margin: 0px;
+  width: 85%;
 }
 
 .hyperlink{
@@ -118,11 +127,23 @@ code {
   font-weight: 700;
 }
 
-.status-label{
+.status-label {
   display: flex;
   align-items:baseline;
   gap: 30px;
   margin: 0px;
+  width: 15%;
+}
+
+.status-change {
+  width: 85%;
+  height: 30px;
+  margin: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 10px;
+
 }
 
 .delete-button{
@@ -137,12 +158,17 @@ code {
 .update-button{
   background-color:chartreuse;
   border-radius: 10px;
-  width: 125px;
+  width: 150px;
+  height: auto;
   text-align: center;
-  margin-top: 10px;
+  margin: 0px;
   cursor: pointer;
+  padding: 2px;
 }
 
-.span {
+.task {
   font-weight: 300;
+  margin: 0px;
+  text-align: left;
+  width: 85%;
 }

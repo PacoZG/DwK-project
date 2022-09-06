@@ -17,7 +17,7 @@ connect({ servers: NATS_URL }).then(async nc => {
 todoappRouter.get('/', async (request, response) => {
   console.log(`GET request to ${request.protocol}://${request.get('host')}/api/todos  done succesfully`)
   const data = await config.query('SELECT * FROM todos')
-  console.log(data)
+
   response.status(200).send(data)
 })
 
