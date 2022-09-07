@@ -8,11 +8,14 @@ const moment = require('moment')
 
 const NATS_URL = process.env.NATS_URL
 
-console.log({ NATS_URL })
-
-connect({ servers: NATS_URL }).then(async nc => {
-  nc.publish('todo_created', sc.encode('Sending data'))
-})
+if (NATS_URL) {
+  console.log({ NATS_URL })
+  connect({ servers: NATS_URL }).then(async nc => {
+    nc.publish('todo_created', sc.encode('Sending data'))
+  })
+} else {
+  console.log('No NATS URL has been provided')
+}
 
 todoappRouter.get('/', async (request, response) => {
   console.log(`GET request to ${request.protocol}://${request.get('host')}/api/todos  done succesfully`)
@@ -46,15 +49,16 @@ todoappRouter.post('/', async (request, response) => {
       createdat: newDate,
       modifiedat: null,
     }
-
-    const todoForDiscord = `New todo created...\n{\n id: ${id}\n task: ${newTodo.task}\n status: ${
-      newTodo.status
-    }\n createdAt: ${newTodo.createdat}\n modifiedAt: ${newTodo.modifiedat}\n}\n\nDate: ${moment().format(
-      'YYYY-MM-DD HH:mm:ss'
-    )}`
-    connect({ servers: NATS_URL }).then(async nc => {
-      nc.publish('todo_created', sc.encode(todoForDiscord))
-    })
+    if (NATS_URL) {
+      const todoForDiscord = `New todo created...\n{\n id: ${id}\n task: ${newTodo.task}\n status: ${
+        newTodo.status
+      }\n createdAt: ${newTodo.createdat}\n modifiedAt: ${newTodo.modifiedat}\n}\n\nDate: ${moment().format(
+        'YYYY-MM-DD HH:mm:ss'
+      )}`
+      connect({ servers: NATS_URL }).then(async nc => {
+        nc.publish('todo_created', sc.encode(todoForDiscord))
+      })
+    }
 
     response.status(201).json(newTodo)
   } else {
@@ -83,14 +87,16 @@ todoappRouter.put('/:id', async (request, response) => {
     modifiedat: newDate,
   }
 
-  const todoForDiscord = `Todo marked as ${updatedTodo.status}...\n{\n id: ${id}\n task: ${
-    updatedTodo.task
-  }\n status: ${updatedTodo.status}\n createdAt: ${moment(updatedTodo.createdat).format(
-    'YYYY-MM-DD HH:mm:ss'
-  )}\n modifiedAt: ${newDate}\n}\n\nModified at: ${newDate}`
-  connect({ servers: NATS_URL }).then(async nc => {
-    nc.publish('todo_created', sc.encode(todoForDiscord))
-  })
+  if (NATS_URL) {
+    const todoForDiscord = `Todo marked as ${updatedTodo.status}...\n{\n id: ${id}\n task: ${
+      updatedTodo.task
+    }\n status: ${updatedTodo.status}\n createdAt: ${moment(updatedTodo.createdat).format(
+      'YYYY-MM-DD HH:mm:ss'
+    )}\n modifiedAt: ${newDate}\n}\n\nModified at: ${newDate}`
+    connect({ servers: NATS_URL }).then(async nc => {
+      nc.publish('todo_created', sc.encode(todoForDiscord))
+    })
+  }
 
   response.status(201).json(updatedTodo)
 })
@@ -100,10 +106,12 @@ todoappRouter.delete('/:id', async (request, response) => {
   console.log(`DELETE request to ${request.protocol}://${request.get('host')}/api/todos/${id}  done succesfully`)
   await config.query(`DELETE FROM todos WHERE id='${id}'`)
 
-  const todoForDiscord = `Todo with id: ${id} has been deleted at ${moment().format('YYYY-MM-DD HH:mm:ss')}\n`
-  connect({ servers: NATS_URL }).then(async nc => {
-    nc.publish('todo_created', sc.encode(todoForDiscord))
-  })
+  if (NATS_URL) {
+    const todoForDiscord = `Todo with id: ${id} has been deleted at ${moment().format('YYYY-MM-DD HH:mm:ss')}\n`
+    connect({ servers: NATS_URL }).then(async nc => {
+      nc.publish('todo_created', sc.encode(todoForDiscord))
+    })
+  }
   response.status(204).json().end()
 })
 
