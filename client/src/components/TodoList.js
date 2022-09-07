@@ -78,7 +78,7 @@ const TodoList = () => {
 
       <textarea className="textarea" placeholder="140 characters minimum" maxLength={200} {...task.params} />
 
-      <button className="button" onClick={() => handleCreateTodo()}>
+      <button className="button" onClick={() => handleCreateTodo()} disabled={!(task.params.value.length >= 10)}>
         Create TODO
       </button>
 
@@ -88,8 +88,8 @@ const TodoList = () => {
             <div className="text">
               <label className="todo-label">{`To do:`}</label>
               {todo.task.startsWith('http') ? (
-                <div className="span-link">
-                  <p className="span-link">{'Read '}</p>
+                <div className="link">
+                  <p className="link-label">{'Read '}</p>
 
                   <a className="hyperlink" href={todo.task} target="blank">
                     {'Wiki page'}
@@ -105,15 +105,9 @@ const TodoList = () => {
               <div className="status-change">
                 <p className="status-is-done">{todo.status}</p>
 
-                {todo.status === 'not-done' ? (
-                  <button className="update-button" onClick={() => handleUpdateTodo(todo)}>
-                    mark as done
-                  </button>
-                ) : (
-                  <button className="update-button" onClick={() => handleUpdateTodo(todo)}>
-                    mark as not done
-                  </button>
-                )}
+                <button className="update-button" onClick={() => handleUpdateTodo(todo)}>
+                  {todo.status === 'not-done' ? 'Mark as done' : 'Mark as not-done'}
+                </button>
               </div>
             </div>
 
