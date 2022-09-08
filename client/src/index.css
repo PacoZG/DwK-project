@@ -28,6 +28,7 @@ code {
   align-items: center;
   gap: 10px;
   padding: 30px;
+  border-style: dotted;
   border-radius: 5px;
   margin: 0px;
   width: 500px;
@@ -67,7 +68,15 @@ code {
   width: 500px;
   border-radius: 10px;
   padding: 10px;
+  transition:  1s;
   cursor: pointer;
+}
+
+.button:disabled {
+  cursor: default;
+  opacity: 0.2;
+  transition:  1s;
+  background: #000;
 }
 
 .textarea {
@@ -123,6 +132,13 @@ code {
 .hyperlink{
   color: indigo;
   width: 100%;
+  transition:  1s;
+}
+
+.hyperlink:hover {
+  transform: scale(0.95);
+  transition:  1s;
+
 }
 
 .status {
@@ -150,6 +166,7 @@ code {
   align-items: center;
   justify-content: space-between;
   padding-left: 10px;
+
 }
 
 .delete-button{
@@ -159,6 +176,13 @@ code {
   text-align: center;
   margin-top: 10px;
   cursor: pointer;
+  transition:  1s;
+}
+
+.delete-button:hover {
+  width: 70px;
+  background: red;
+  transition:  0.5s;
 }
 
 .update-button{
@@ -171,6 +195,12 @@ code {
   margin: 0px;
   cursor: pointer;
   padding: 4px;
+  transition:  1s;
+}
+
+.update-button:hover {
+  transform: rotate(720deg) scale(1.4);
+  transition:  1s;
 }
 
 .task {
