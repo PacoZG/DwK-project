@@ -4,3 +4,4 @@ Dockerfile
 build
 node_modules
 README.md
+.env
