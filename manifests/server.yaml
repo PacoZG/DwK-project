@@ -1,14 +1,26 @@
-# Deployment
-apiVersion: apps/v1
-kind: Deployment
+# Rollout
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: server-dep
   namespace: project
 spec:
-  replicas: 1
+  replicas: 4
   selector:
     matchLabels:
       app: server
+  strategy:
+    canary:
+      steps:
+      - setWeight: 25
+      - pause:
+          duration: 30s
+      - setWeight: 50
+      - pause:
+          duration: 30s
+      - analysis:
+          templates:
+          - templateName: cpu-usage-rate
   template:
     metadata:
       labels:
@@ -16,7 +28,7 @@ spec:
     spec:
       containers:
         - name: server
-          image: SERVER/IMAGE
+          image: sirpacoder/server:v4.06
           imagePullPolicy: Always
           env:
             - name: POSTGRES_HOST
@@ -34,9 +46,24 @@ spec:
                 configMapKeyRef:
                   name: config-env-variables
                   key: postgres_db
+            - name: NATS_URL
+              value: nats://my-nats:4222
           envFrom:
             - secretRef:
                 name: postgres-pw
+          readinessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            failureThreshold: 10
+            httpGet:
+              path: /healthz
+              port: 3001
+          livenessProbe:
+            initialDelaySeconds: 20
+            periodSeconds: 5
+            httpGet:
+              path: /healthz
+              port: 3001
           resources:
             requests:
               memory: '64Mi'
@@ -53,7 +80,7 @@ metadata:
   name: server-svc
   namespace: project
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: server
   ports:

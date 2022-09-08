@@ -1,6 +1,6 @@
-# Deployment
-apiVersion: apps/v1
-kind: Deployment
+# Rollout
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: client-dep
   namespace: project
@@ -9,6 +9,18 @@ spec:
   selector:
     matchLabels:
       app: client
+  strategy:
+    canary:
+      steps:
+      - setWeight: 25
+      - pause:
+          duration: 30s
+      - setWeight: 50
+      - pause:
+          duration: 30s
+      - analysis:
+          templates:
+          - templateName: cpu-usage-rate
   template:
     metadata:
       labels:
@@ -16,7 +28,7 @@ spec:
     spec:
       containers:
         - name: client
-          image: CLIENT/IMAGE
+          image: sirpacoder/client:v4.06
           imagePullPolicy: Always
           readinessProbe:
             initialDelaySeconds: 10
@@ -25,18 +37,12 @@ spec:
             httpGet:
               path: /healthz
               port: 3000
-          livenessProbe:
-            initialDelaySeconds: 20
-            periodSeconds: 5
-            httpGet:
-              path: /healthz
-              port: 3000
           resources:
             requests:
-              memory: '64Mi'
-              cpu: '250m'
+              memory: '1Gi'
+              cpu: '500m'
             limits:
-              memory: '516Mi'
+              memory: '10Gi'
               cpu: '500m'
 
 ---

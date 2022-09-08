@@ -5,7 +5,7 @@ metadata:
   name: broadcaster-dep
   namespace: project
 spec:
-  replicas: 1
+  replicas: 6
   selector:
     matchLabels:
       app: broadcaster
@@ -21,6 +21,8 @@ spec:
           env:
             - name: NATS_URL
               value: nats://my-nats:4222
+            - name: DISCORD_URL
+              value: https://discord.com/api/webhooks/1012335028254036099/JS8N_3lG6iGPLRORpz1mcOfIX5WzPJ5JrUJryyFm2_nOCOwmP8qcBakK6YtfDm3DQLD-
           resources:
             requests:
               memory: '64Mi'
