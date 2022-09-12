@@ -35,7 +35,7 @@ jobs:
     - name: Build and Push Broadcaster
       uses: docker/build-push-action@v2
       with:
-        context: brodcaster
+        context: broadcaster
         push: true
         tags: sirpacoder/broadcaster:${{ github.sha }}
 
