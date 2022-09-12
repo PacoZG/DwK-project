@@ -11,13 +11,13 @@ resources:
 - manifests/horizontalpodautoscaler.yaml
 images:
 - name: PROJECT_CLIENT
-  newName: sirpacoder/client:v4.06
+  newName: sirpacoder/client
 - name: PROJECT_SERVER
-  newName: sirpacoder/server:v4.06
+  newName: sirpacoder/server
 - name: PROJECT_BROADCASTER
-  newName: sirpacoder/broadcaster:v4.06
+  newName: sirpacoder/broadcaster
 - name: PROJECT_CRONJOB
-  newName: sirpacoder/wiki_url:v4.06
+  newName: sirpacoder/wiki_url
 
 # ---
   
