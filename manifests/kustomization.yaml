@@ -12,13 +12,13 @@ resources:
 images:
 - name: PROJECT_BROADCASTER
   newName: sirpacoder/broadcaster
-  newTag: c20ac9eb9929ae6d2d58b391ad1ad9a813b9a137
+  newTag: 0da1b916c864b0298b3962a7fc38397a056baa95
 - name: PROJECT_CLIENT
   newName: sirpacoder/client
-  newTag: c20ac9eb9929ae6d2d58b391ad1ad9a813b9a137
+  newTag: 0da1b916c864b0298b3962a7fc38397a056baa95
 - name: PROJECT_CRONJOB
   newName: sirpacoder/wiki_url
-  newTag: c20ac9eb9929ae6d2d58b391ad1ad9a813b9a137
+  newTag: 0da1b916c864b0298b3962a7fc38397a056baa95
 - name: PROJECT_SERVER
   newName: sirpacoder/server
-  newTag: c20ac9eb9929ae6d2d58b391ad1ad9a813b9a137
+  newTag: 0da1b916c864b0298b3962a7fc38397a056baa95
