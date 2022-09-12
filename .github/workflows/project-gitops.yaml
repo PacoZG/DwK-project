@@ -1,4 +1,4 @@
-name: Release broadcaster
+name: Release project application
 
 on:
   push:
