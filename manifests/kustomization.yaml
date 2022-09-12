@@ -1,14 +1,14 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-- manifests/client.yaml
-- manifests/server.yaml
-- manifests/broadcaster.yaml
-- manifests/cronjob-curl.yaml
-- manifests/ingress.yaml
-- manifests/secret.enc.yaml
-- manifests/config-map.yaml
-- manifests/horizontalpodautoscaler.yaml
+- client.yaml
+- server.yaml
+- broadcaster.yaml
+- cronjob-curl.yaml
+- ingress.yaml
+- secret.enc.yaml
+- config-map.yaml
+- horizontalpodautoscaler.yaml
 images:
 - name: PROJECT_BROADCASTER
   newName: sirpacoder/broadcaster
