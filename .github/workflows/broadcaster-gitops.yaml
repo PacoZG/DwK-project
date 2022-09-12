@@ -1,0 +1,79 @@
+name: Release broadcaster
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'broadcaster/**'
+      - '.github/workflows/broadcaster.yml'
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Login to Docker Hub
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Build and Push Client
+      uses: docker/build-push-action@v2
+      with:
+        context: client
+        push: true
+        tags: sirpacoder/client:${{ github.sha }}
+    
+    - name: Build and Push Server
+      uses: docker/build-push-action@v2
+      with:
+        context: server
+        push: true
+        tags: sirpacoder/server:${{ github.sha }}
+    
+    - name: Build and Push Broadcaster
+      uses: docker/build-push-action@v2
+      with:
+        context: brodcaster
+        push: true
+        tags: sirpacoder/broadcaster:${{ github.sha }}
+
+    - name: Build and Push cronjob
+      uses: docker/build-push-action@v2
+      with:
+        context: cronjob
+        push: true
+        tags: sirpacoder/wiki_url:${{ github.sha }}
+
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+    - uses: actions/checkout@v2
+
+    # Set up kustomize
+    - name: Set up Kustomize
+      uses: imranismail/setup-kustomize@v1
+
+    # Update yamls
+    - name: Update yamls
+      working-directory: manifests
+      run: |-
+        kustomize edit set image PROJECT_CLIENT=sirpacoder/client:${{ github.sha }}
+        kustomize edit set image PROJECT_SERVER=sirpacoder/server:${{ github.sha }}
+        kustomize edit set image PROJECT_BROADCASTER=sirpacoder/broadcaster:${{ github.sha }}
+        kustomize edit set image PROJECT_CRONJOB=sirpacoder/wiki_url:${{ github.sha }}
+
+    # Commit and push
+    - uses: EndBug/add-and-commit@v7
+      with:
+        add: 'manifests/kustomization.yaml'
+        message: New version release for gitops-app ${{ github.sha }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

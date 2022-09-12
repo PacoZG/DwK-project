@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
         - name: client
-          image: sirpacoder/client:v4.06
+          image: PROJECT_CLIENT
           imagePullPolicy: Always
           readinessProbe:
             initialDelaySeconds: 10
