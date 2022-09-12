@@ -3,10 +3,7 @@ name: Release project application
 on:
   push:
     branches:
-      - master
-    paths:
-      - 'broadcaster/**'
-      - '.github/workflows/broadcaster.yml'
+      - main
 
 jobs:
   build:
