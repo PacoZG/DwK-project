@@ -4,6 +4,15 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'client/**'
+      - '.github/workflows/client.yml'
+      - 'server/**'
+      - '.github/workflows/server.yml'
+      - 'broadcaster/**'
+      - '.github/workflows/broadcaster.yml'
+      - 'cronjob/**'
+      - '.github/workflows/cronjob.yml'
 
 jobs:
   build:
