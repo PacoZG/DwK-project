@@ -3,7 +3,7 @@ name: Release project application
 on:
   push:
     branches:
-      - main
+      - 'main'
     paths:
       - 'client/**'
       - '.github/workflows/client.yml'
