@@ -3,16 +3,16 @@ name: Release project application
 on:
   push:
     branches:
-      - 'main'
-    # paths:
-    #   - 'client/**'
-    #   - '.github/workflows/client.yml'
-    #   - 'server/**'
-    #   - '.github/workflows/server.yml'
-    #   - 'broadcaster/**'
-    #   - '.github/workflows/broadcaster.yml'
-    #   - 'cronjob/**'
-    #   - '.github/workflows/cronjob.yml'
+      - master
+    paths:
+      - 'client/**'
+      - '.github/workflows/project-gitops.yml'
+      - 'server/**'
+      - '.github/workflows/project-gitops.yml'
+      - 'broadcaster/**'
+      - '.github/workflows/project-gitops.yml'
+      - 'cronjob/**'
+      - '.github/workflows/project-gitops.yml'
 
 jobs:
   build:
