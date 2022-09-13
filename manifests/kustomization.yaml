@@ -3,8 +3,6 @@ kind: Kustomization
 resources:
 - broadcaster.yaml
 - cronjob.yaml
-- client.yaml
-- ingress.yaml
 images:
 - name: PROJECT_BROADCASTER
   newName: sirpacoder/broadcaster
@@ -12,24 +10,19 @@ images:
 - name: PROJECT_CRONJOB
   newName: sirpacoder/wiki_url
   newTag: 81c762ca4274e4853eedf72c0482c74e4e9ccba2
+
+---
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- client.yaml
+- config-map.yaml
+- ingress.yaml
+images:
 - name: PROJECT_CLIENT
   newName: sirpacoder/client
   newTag: 81c762ca4274e4853eedf72c0482c74e4e9ccba2
-
-# ---
-
-# apiVersion: kustomize.config.k8s.io/v1beta1
-# kind: Kustomization
-# resources:
-# - analysistemplate.yaml
-# - client.yaml
-# - config-map.yaml
-# - horizontalpodautoscaler.yaml
-# - ingress.yaml
-# images:
-# - name: PROJECT_CLIENT
-#   newName: sirpacoder/client
-#   newTag: 81c762ca4274e4853eedf72c0482c74e4e9ccba2
 
 # ---
 
