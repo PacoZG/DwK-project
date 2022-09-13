@@ -2,9 +2,13 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
 - broadcaster.yaml
+- cronjob.yaml
 images:
 - name: PROJECT_BROADCASTER
   newName: sirpacoder/broadcaster
+  newTag: 81c762ca4274e4853eedf72c0482c74e4e9ccba2
+- name: PROJECT_CRONJOB
+  newName: sirpacoder/wiki_url
   newTag: 81c762ca4274e4853eedf72c0482c74e4e9ccba2
 
 # ---
@@ -34,16 +38,3 @@ images:
 # - name: PROJECT_SERVER
 #   newName: sirpacoder/server
 #   newTag: 81c762ca4274e4853eedf72c0482c74e4e9ccba2
-
----
-
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-resources:
-- cronjob.yaml
-images:
-- name: PROJECT_CRONJOB
-  newName: sirpacoder/wiki_url
-  newTag: 81c762ca4274e4853eedf72c0482c74e4e9ccba2
-
----
