@@ -10,3 +10,15 @@ resources:
 - config-map.yaml
 - horizontalpodautoscaler.yaml
 images:
+- name: PROJECT_BROADCASTER
+  newName: sirpacoder/broadcaster
+  newTag: 968f8cae73e247117276f14d4f19d649aa0a6b57
+- name: PROJECT_CLIENT
+  newName: sirpacoder/client
+  newTag: 968f8cae73e247117276f14d4f19d649aa0a6b57
+- name: PROJECT_CRONJOB
+  newName: sirpacoder/wiki_url
+  newTag: 968f8cae73e247117276f14d4f19d649aa0a6b57
+- name: PROJECT_SERVER
+  newName: sirpacoder/server
+  newTag: 968f8cae73e247117276f14d4f19d649aa0a6b57
