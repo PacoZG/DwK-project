@@ -1,20 +1,25 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-- broadcaster.yaml
-- client.yaml
-- server.yaml
-- server.yaml
+- /broadcaster.yaml
+- /client.yaml
+- /config-map.yaml
+- /cronjob.yaml
+- /server.yaml
+- /horizontalpodautoscaler.yaml
+- /ingress.yaml
+- /postgres-statefulset.yaml
+- /server.yaml
 images:
 - name: PROJECT_BROADCASTER
   newName: sirpacoder/broadcaster
-  newTag: a7aa83d9846a3b4c74d45bdf9209804c282e31a3
+  newTag: a4106eb220ce7a09659a009327d3b0abab064fb6
 - name: PROJECT_CLIENT
   newName: sirpacoder/client
-  newTag: a7aa83d9846a3b4c74d45bdf9209804c282e31a3
+  newTag: a4106eb220ce7a09659a009327d3b0abab064fb6
 - name: PROJECT_CRONJOB
   newName: sirpacoder/wiki_url
-  newTag: a7aa83d9846a3b4c74d45bdf9209804c282e31a3
+  newTag: a4106eb220ce7a09659a009327d3b0abab064fb6
 - name: PROJECT_SERVER
   newName: sirpacoder/server
-  newTag: a7aa83d9846a3b4c74d45bdf9209804c282e31a3
+  newTag: a4106eb220ce7a09659a009327d3b0abab064fb6
