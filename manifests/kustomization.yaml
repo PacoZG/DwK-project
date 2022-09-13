@@ -5,7 +5,7 @@ resources:
 images:
 - name: PROJECT_BROADCASTER
   newName: sirpacoder/broadcaster
-  newTag: a9e38a875dd1199391c9e635020282bfa173beac
+  newTag: 81c762ca4274e4853eedf72c0482c74e4e9ccba2
 
 # ---
 
@@ -20,7 +20,7 @@ images:
 # images:
 # - name: PROJECT_CLIENT
 #   newName: sirpacoder/client
-#   newTag: a9e38a875dd1199391c9e635020282bfa173beac
+#   newTag: 81c762ca4274e4853eedf72c0482c74e4e9ccba2
 
 # ---
 
@@ -33,7 +33,7 @@ images:
 # images:
 # - name: PROJECT_SERVER
 #   newName: sirpacoder/server
-#   newTag: a9e38a875dd1199391c9e635020282bfa173beac
+#   newTag: 81c762ca4274e4853eedf72c0482c74e4e9ccba2
 
 # ---
 
@@ -44,6 +44,6 @@ images:
 # images:
 # - name: PROJECT_CRONJOB
 #   newName: sirpacoder/wiki_url
-#   newTag: a9e38a875dd1199391c9e635020282bfa173beac
+#   newTag: 81c762ca4274e4853eedf72c0482c74e4e9ccba2
 
 # ---
