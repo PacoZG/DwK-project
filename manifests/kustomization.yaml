@@ -1,16 +1,9 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-- analysistemplate.yaml
 - broadcaster.yaml
 - client.yaml
-- config-map.yaml
-- cronjob.yaml
 - server.yaml
-- horizontalpodautoscaler.yaml
-- ingress.yaml
-- postgres-statefulset.yaml
-- secret.enc.yaml
 - server.yaml
 images:
 - name: PROJECT_BROADCASTER
