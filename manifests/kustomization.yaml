@@ -2,48 +2,26 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
 - analysistemplate.yaml
+- broadcaster.yaml
 - client.yaml
 - config-map.yaml
+- cronjob.yaml
+- server.yaml
 - horizontalpodautoscaler.yaml
 - ingress.yaml
+- postgres-statefulset.yaml
+- secret.enc.yaml
+- server.yaml
 images:
 - name: PROJECT_BROADCASTER
   newName: sirpacoder/broadcaster
   newTag: a9e38a875dd1199391c9e635020282bfa173beac
-
----
-
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-resources:
-- broadcaster.yaml
-images:
 - name: PROJECT_CLIENT
   newName: sirpacoder/client
   newTag: a9e38a875dd1199391c9e635020282bfa173beac
-
----
-
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-resources:
-- ingress.yaml
-- postgres-statefulset.yaml
-- server.yaml
-images:
-- name: PROJECT_SERVER
-  newName: sirpacoder/server
-  newTag: a9e38a875dd1199391c9e635020282bfa173beac
-
----
-
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-resources:
-- cronjob.yaml
-images:
 - name: PROJECT_CRONJOB
   newName: sirpacoder/wiki_url
   newTag: a9e38a875dd1199391c9e635020282bfa173beac
-
----
+- name: PROJECT_SERVER
+  newName: sirpacoder/server
+  newTag: a9e38a875dd1199391c9e635020282bfa173beac
