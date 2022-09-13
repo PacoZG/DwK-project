@@ -11,3 +11,4 @@ private-key.json
 *.pack
 secret.yaml
 .env
+age.agekey

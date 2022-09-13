@@ -10,6 +10,7 @@ resources:
 - horizontalpodautoscaler.yaml
 - ingress.yaml
 - postgres-statefulset.yaml
+- secret.enc.yaml
 - server.yaml
 images:
 - name: PROJECT_BROADCASTER
