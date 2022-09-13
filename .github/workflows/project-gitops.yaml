@@ -40,7 +40,7 @@ jobs:
         push: true
         tags: sirpacoder/broadcaster:${{ github.sha }}
 
-    - name: Build and Push cronjob
+    - name: Build and Push Cronjob
       uses: docker/build-push-action@v2
       with:
         context: cronjob
@@ -61,7 +61,7 @@ jobs:
 
     # Update yamls
     - name: Update yamls
-      working-directory: manifests
+      working-directory: /manifests
       run: |-
         kustomize edit set image PROJECT_CLIENT=sirpacoder/client:${{ github.sha }}
         kustomize edit set image PROJECT_SERVER=sirpacoder/server:${{ github.sha }}
