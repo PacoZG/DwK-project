@@ -12,3 +12,15 @@ resources:
 - postgres-statefulset.yaml
 - server.yaml
 images:
+- name: PROJECT_BROADCASTER
+  newName: sirpacoder/broadcaster
+  newTag: 41bf7cf72846bae8231251cfefed5dded9cbf286
+- name: PROJECT_CLIENT
+  newName: sirpacoder/client
+  newTag: 41bf7cf72846bae8231251cfefed5dded9cbf286
+- name: PROJECT_CRONJOB
+  newName: sirpacoder/wiki_url
+  newTag: 41bf7cf72846bae8231251cfefed5dded9cbf286
+- name: PROJECT_SERVER
+  newName: sirpacoder/server
+  newTag: 41bf7cf72846bae8231251cfefed5dded9cbf286
