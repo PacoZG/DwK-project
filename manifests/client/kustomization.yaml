@@ -1,0 +1,8 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- client.yaml
+images:
+- name: PROJECT_CLIENT
+  newName: sirpacoder/client
+  newTag: 81c762ca4274e4853eedf72c0482c74e4e9ccba2

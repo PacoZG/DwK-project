@@ -1,5 +1,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+
 resources:
 - broadcaster.yaml
 - cronjob.yaml
@@ -7,6 +8,7 @@ resources:
 - ingress.yaml
 - postgres-statefulset.yaml
 - horizontalpodautoscaler.yaml
+
 images:
 - name: PROJECT_BROADCASTER
   newName: sirpacoder/broadcaster
@@ -15,27 +17,7 @@ images:
   newName: sirpacoder/wiki_url
   newTag: 81c762ca4274e4853eedf72c0482c74e4e9ccba2
 
----
+bases:
+- ../client
+- ../server
 
-
-# apiVersion: kustomize.config.k8s.io/v1beta1
-# kind: Kustomization
-# resources:
-# - client.yaml
-# images:
-# - name: PROJECT_CLIENT
-#   newName: sirpacoder/client
-#   newTag: 81c762ca4274e4853eedf72c0482c74e4e9ccba2
-
-# ---
-
-# apiVersion: kustomize.config.k8s.io/v1beta1
-# kind: Kustomization
-# resources:
-# - ingress.yaml
-# - postgres-statefulset.yaml
-# - server.yaml
-# images:
-# - name: PROJECT_SERVER
-#   newName: sirpacoder/server
-#   newTag: 81c762ca4274e4853eedf72c0482c74e4e9ccba2
