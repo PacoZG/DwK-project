@@ -43,21 +43,21 @@ spec:
 
 ---
 # Ingress
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: project
-  namespace: project
-  labels:
-    name: project
-spec:
-  rules:
-    - http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: client-svc
-                port:
-                  number: 80
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: project
+#   namespace: project
+#   labels:
+#     name: project
+# spec:
+#   rules:
+#     - http:
+#         paths:
+#           - path: /
+#             pathType: Prefix
+#             backend:
+#               service:
+#                 name: client-svc
+#                 port:
+#                   number: 80

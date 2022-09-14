@@ -4,7 +4,7 @@ metadata:
   name: server-dep
   namespace: project
 spec:
-  replicas: 2
+  replicas: 4
   selector:
     matchLabels:
       app: server
@@ -38,19 +38,12 @@ spec:
           envFrom:
             - secretRef:
                 name: postgres-pw
-          # readinessProbe:
-          #   initialDelaySeconds: 10
+          # livenessProbe:
+          #   initialDelaySeconds: 20
           #   periodSeconds: 5
-          #   failureThreshold: 10
           #   httpGet:
           #     path: /healthz
           #     port: 3001
-          livenessProbe:
-            initialDelaySeconds: 20
-            periodSeconds: 5
-            httpGet:
-              path: /healthz
-              port: 3001
           resources:
             requests:
               memory: '64Mi'
@@ -77,35 +70,35 @@ spec:
 
 ---
 # Ingress
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: project
-  namespace: project
-  labels:
-    name: project
-spec:
-  rules:
-    - http:
-        paths:
-          - path: /api/todos
-            pathType: Prefix
-            backend:
-              service:
-                name: server-svc
-                port:
-                  number: 80
-          - path: /api/image
-            pathType: Prefix
-            backend:
-              service:
-                name: server-svc
-                port:
-                  number: 80
-          - path: /healthz
-            pathType: Prefix
-            backend:
-              service:
-                name: server-svc
-                port:
-                  number: 80
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: project
+#   namespace: project
+#   labels:
+#     name: project
+# spec:
+#   rules:
+#     - http:
+#         paths:
+#           - path: /api/todos
+#             pathType: Prefix
+#             backend:
+#               service:
+#                 name: server-svc
+#                 port:
+#                   number: 80
+#           - path: /api/image
+#             pathType: Prefix
+#             backend:
+#               service:
+#                 name: server-svc
+#                 port:
+#                   number: 80
+#           - path: /healthz
+#             pathType: Prefix
+#             backend:
+#               service:
+#                 name: server-svc
+#                 port:
+#                   number: 80
