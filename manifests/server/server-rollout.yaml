@@ -1,5 +1,6 @@
-apiVersion: apps/v1
-kind: Deployment
+# Rollout
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: server-dep
   namespace: project
@@ -8,6 +9,18 @@ spec:
   selector:
     matchLabels:
       app: server
+  strategy:
+    canary:
+      steps:
+      - setWeight: 25
+      - pause:
+          duration: 30s
+      - setWeight: 50
+      - pause:
+          duration: 30s
+      - analysis:
+          templates:
+          - templateName: cpu-usage-rate
   template:
     metadata:
       labels:
